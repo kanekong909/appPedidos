@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login</title>
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Estilos -->
+  <link rel="stylesheet" href="css/registro.css">
+  <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="css/login.css">
+</head>
+<body class="bg-gray-100 flex flex-col items-center justify-center h-screen gradient-background">
+
+  <img src="/assets/logo.svg" alt="Logo BrinsWinsLood" class="logo w-12 transform -rotate-180 mt-5">
+  <h1 class="titulo text-2xl font-bold mb-20">BRENWINSLOOD</h1>
+
+  <form id="login-form" class="bg-white p-8 rounded shadow w-80 space-y-4">
+    <h2 class="text-xl font-bold text-center poppins uppers">Iniciar sesión</h2>
+    <input type="email" id="email" placeholder="Correo" required class="w-full border color-border px-3 py-2 rounded" />
+    <input type="password" id="password" placeholder="Contraseña" required class="w-full border color-border px-3 py-2 rounded" />
+    <button type="submit" class="w-full btn-entrar text-white py-2 rounded hover:bg-green-600 inter bold">
+      Entrar
+    </button>
+    <p class="text-sm text-center mt-2">
+      ¿No tienes cuenta? <a href="register.html" class="text-blue-600 underline">Regístrate</a>
+    </p>
+  </form>
+
+  <!-- Toast para error de login -->
+  <div id="login-error-toast"
+      class="hidden fixed top-0 left-1/2 transform -translate-x-1/2 -translate-y-10 opacity-0 mt-4 bg-red-600 text-white px-6 py-3 rounded shadow-lg transition-all duration-500 z-50">
+  </div>
+
+  <script type="module" src="/js/login.js"></script>
+</body>
+</html>

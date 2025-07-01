@@ -1,0 +1,60 @@
+.titulo-dashboard {
+    font-family: var(--judson-font);
+    font-size: 13px;
+}
+.dorado {
+    background-color: #9F8B00;
+}
+.border-dorado {
+    border: 1px solid #9F8B00;
+}
+.dot {
+    background-color: black;
+}
+.size-15 {
+    font-size: 14px;
+}
+.ml-5 {
+    margin-left: 5px;
+}
+.size-12 {
+    font-size: 12px;
+}
+.size-10 {
+    font-size: 10px;
+}
+.red-color {
+    color: #ae0808;
+}
+.open-image {
+  transition: transform 0.2s ease-in-out;
+}
+.open-image:hover {
+  transform: scale(1.02);
+}
+
+
+/* Estilos por tipo de notificación */
+.toast-success {
+  background-color: #16a34a; /* verde */
+}
+.toast-error {
+  background-color: #dc2626; /* rojo */
+}
+
+
+/* Efectos */
+@keyframes fade-in-down {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-down {
+  animation: fade-in-down 0.3s ease-out;
+}

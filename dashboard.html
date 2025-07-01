@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard Restaurante</title>
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Estilos -->
+  <link rel="stylesheet" href="css/registro.css">
+  <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body class="bg-gray-50 min-h-screen p-6 gradient-background">
+
+  <!-- Header -->
+  <header class="w-full flex justify-between items-center mb-5 h-[70px] shadow-md">
+    <!-- Icono Usuario (Izquierda) -->
+    <div class="w-1/4 flex justify-start">
+      <img src="/assets/user.svg" alt="Usuario" class="w-10 h-10">
+    </div>
+
+    <!-- Logo y Título (Centro) -->
+    <div class="w-1/2 flex flex-col items-center relative mt-11">
+      <img src="/assets/logo.svg" alt="Logo BrinsWinsLood" class="logo w-5 transform -rotate-180 mt-5">
+      <h1 class="titulo-dashboard font-bold mb-20">BRENWINSLOOD</h1>
+    </div>
+
+    <!-- Icono Menú (Derecha) -->
+    <div class="relative w-1/4 flex justify-end">
+      <img src="/assets/menu.svg" alt="Menú" id="menu-icon" class="w-10 h-10 cursor-pointer">
+
+      <!-- Menú desplegable -->
+      <div id="dropdown-menu"
+          class="hidden absolute top-12 right-0 bg-white border border-gray-200 rounded-lg shadow-lg w-40 z-50 animate-fade-in-down">
+        <button id="logout"
+                class="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100 hover:text-red-700">
+          Cerrar sesión
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <section class="bg-white p-4 rounded shadow mt-4">
+    <h2 class="text-lg font-bold mb-2">Meseros registrados</h2>
+    <ul id="lista-meseros" class="space-y-2 list-disc list-inside text-gray-700"></ul>
+  </section>
+
+
+  <div id="toast" class="hidden text-center mt-4 text-sm text-white bg-green-600 p-2 rounded"></div>
+
+  <!-- Nombre del Encargado -->
+  <div class="nombre-encargado text-left text-xl font-semibold text-gray-800 mb-2"></div>
+
+  <!-- Divisor -->
+  <div class="flex items-center justify-center my-4">
+    <!-- Línea izquierda -->
+    <div class="flex-1 h-px dorado"></div>
+
+    <!-- Círculo en el centro -->
+    <div class="mx-4 w-4 h-4 rounded-full transparent border-2 border-dorado flex items-center justify-center">
+      <div class="w-1 h-1 dot rounded-full"></div>
+    </div>
+
+    <!-- Línea derecha -->
+    <div class="flex-1 h-px dorado"></div>
+  </div>
+
+  <!-- Formulario: Crear categoría -->
+  <section class="bg-white p-4 rounded shadow mb-6">
+    <h2 class="text-xl font-semibold mb-2 belanosima">Crear categoría</h2>
+    <form id="form-categoria" class="flex gap-4">
+      <input type="text" id="nombre-categoria" placeholder="Ej: Hamburguesas" required class="border px-3 py-2 rounded w-full"/>
+      <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 belanosima">CREAR</button>
+    </form>
+  </section>
+
+  <!-- Ver categorias -->
+  <div class="mb-6">
+    <h2 class="text-lg font-semibold text-gray-800 mb-2 ml-5 belanosima">Categorías</h2>
+    <select id="categoria-plato" required class="border px-3 py-2 rounded w-full">
+      <option value="">Selecciona una categoría</option>
+    </select>
+  </div>
+
+  <!-- Formulario: Crear plato -->
+  <section class="bg-white p-4 rounded shadow mb-6">
+    <h2 class="text-xl font-semibold mb-2">Crear plato</h2>
+    <form id="form-plato" class="space-y-4">
+    <div class="grid gap-4 md:grid-cols-2">
+      <input type="text" id="nombre-plato" placeholder="Nombre del plato" required class="border px-3 py-2 rounded w-full"/>
+      <input type="text" id="descripcion-plato" placeholder="Descripción" required class="border px-3 py-2 rounded w-full"/>
+      <input type="number" id="precio-plato" placeholder="Precio" required class="border px-3 py-2 rounded w-full"/>
+      <input type="number" id="personas-plato" placeholder="# de personas" required class="border px-3 py-2 rounded w-full"/>
+      <input type="file" id="imagen-plato" accept="image/*" required class="border px-3 py-2 rounded w-full" />
+    </div>
+
+      <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 w-full belanosima">
+        Crear plato
+      </button>
+    </form>
+  </section>
+
+  <!-- Ver categorias creadas -->
+  <section class="categorias-resumen grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-6">
+    <!-- Aquí se insertarán las tarjetas dinámicamente -->
+  </section>
+
+  <div class="categorias-resumen space-y-4"></div>
+
+  <!-- Toast de notificación -->
+  <div id="toast" class="fixed top-4 right-4 z-50 hidden px-4 py-3 rounded shadow-lg text-white text-sm transition-all duration-500">
+    <span id="toast-message"></span>
+  </div>
+
+  <!-- Modal/Toast -->
+  <div id="toast" class="hidden fixed top-4 right-4 bg-green-600 text-white px-4 py-2 rounded shadow transition-all duration-300 opacity-0 -translate-y-10 z-50">
+    <span id="toast-message"></span>
+  </div>
+
+  <!-- Modal imagen -->
+  <div id="modal-imagen" class="fixed inset-0 bg-black bg-opacity-70 backdrop-blur-sm flex items-center justify-center z-50 hidden">
+    <div id="modal-contenido" class="p-4">
+      <img id="imagen-grande" src="" alt="Vista ampliada" class="max-w-[90vw] max-h-[80vh] rounded shadow-lg" />
+    </div>
+  </div>
+
+
+  <!-- Anime.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+  <!-- Script -->
+  <script type="module" src="js/dasboard.js"></script>
+</body>
+</html>
